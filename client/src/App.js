@@ -1,11 +1,12 @@
-import './App.css';
+import "./App.css";
+import CardContainer from "./Components/CardContainer.jsx";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Henry Countries</h1>
-    </div>
-  );
+	return (
+		<div className="App">
+      <CardContainer></CardContainer>
+		</div>
+	);
 }
 
 export default App;
