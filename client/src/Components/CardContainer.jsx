@@ -5,17 +5,20 @@ import {getData} from './../Actions';
 import containerStyle from './../Css/CardContainer.module.css';
 
 
-export function CardContainer(props){
+export function CardContainer({data, pages, byName, byPopulation, getData, isLoading}){
 
     useEffect(()=>{
-        props.getData(1);
-    },[])
+        let options = {}
+        if(byName==="asc" || byName==="dec") options.byName = byName;
+        if(byPopulation==="asc" || byPopulation==="dec") options.byPopulation = byPopulation;
+        getData(1, options);
+    },[byName, byPopulation])
 
     return <div id={containerStyle.cardsContainer}>
-        {(props.isLoading)?
+        {(isLoading)?
             <h1>loading...</h1>
             :
-            props.data.map(country=>{
+            data.map(country=>{
                 return <Card
                     id={country.id}
                     name={country.name}
@@ -33,12 +36,14 @@ function mapStateToProps(state){
         data: state.dataPage,
         pages: state.pages,
         isLoading: state.isLoading,
+        byName: state.byName,
+        byPopulation: state.byPopulation,
     }
 };
 
 function mapDispatchToProps(dispatch){
     return {
-        getData: (page)=>dispatch(getData(page)),
+        getData: (page,options)=>dispatch(getData(page,options)),
     }
 };
 

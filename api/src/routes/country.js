@@ -30,7 +30,7 @@ async function getData(name = undefined){
             data[i] = data[i].toJSON();
         }
     }
-    if(data[0].toJSON){
+    if(data.length!=0 && data[0].toJSON){
         for(let i=0; i<data.length; i++){
             data[i] = data[i].toJSON();
         }
@@ -39,8 +39,7 @@ async function getData(name = undefined){
 }
 
 function filterData(data, byContinent = undefined, byActivity = undefined){
-    console.log("byContinent: "+byContinent);
-    console.log("byActivity: "+byActivity);
+    
     if(byContinent){
         data = data.filter(country => country.continent === byContinent);
     }
@@ -60,8 +59,6 @@ function filterData(data, byContinent = undefined, byActivity = undefined){
 }
 
 function orderBy(data, byName = undefined, byPopulation = undefined){
-    console.log("byName "+byName);
-    console.log("byPopulation "+byPopulation);
     let isReverse;
     if(byName){
         data = data.sort((countryA, countryB)=>{
@@ -75,7 +72,6 @@ function orderBy(data, byName = undefined, byPopulation = undefined){
         data = data.sort((countryA,countryB)=>countryA.population-countryB.population);
         isReverse = byPopulation;
     }
-    console.log("isReverse: "+isReverse);
     data = (isReverse==='dec') ? data.reverse() : data;
     return data;
 }
@@ -106,15 +102,19 @@ router.get('/countries', async (req, res) => {
             :
             await getData();
         if(req.query.byContinent || req.query.byActivity) data = filterData(data, req.query.byContinent, req.query.byActivity);
+        console.log("%s byName= "+req.query.byName+" byPopulation= "+req.query.byPopulation);
         if(req.query.byName || req.query.byPopulation) data = orderBy(data, req.query.byName, req.query.byPopulation);
         data = pagination(data);
-        data = {
-            dataPage: data[req.query.page],
-            pages: data.length-1,
-        }
+        data = (data.length === 0) ? 
+                []
+                :                
+                {
+                    dataPage: data[req.query.page-1],
+                    pages: data.length-1,
+                }
     }catch(e){
         res.status(500).json({status:500, e:e.toString(),});
-    }
+    } 
     res.status(200).json(data);
 });
 

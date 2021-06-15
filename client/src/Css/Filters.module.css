@@ -1,0 +1,71 @@
+
+#filterContainer{
+    display: flex;
+    align-items: center;
+}
+
+#orderBy{
+    font-family: var(--titleFont);
+    width: 200px;
+}
+
+#byName, #byPopulation, #isReverse{
+    display: none;
+}
+
+.labelNormal{
+    position: relative;
+    width: 200px;
+    height: 25px;
+    background: transparent;
+    margin: .1rem;
+    border-radius: 3px;
+    font-family: var(--titleFont);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.3rem;
+    overflow: hidden;
+}
+
+.labelColor{
+    position: relative;
+    top: 0px;
+    left: 220px;
+    width: 240px;
+    height: 35px;
+    background: #05ce91;
+    transition: .4s ease;
+    clip-path: circle(0px at 160px 25px);
+}
+
+.name{
+    z-index: 1;
+    transition: .4s;
+}
+
+.icon{
+    display: block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    font-size: 16px;
+    color: #ededed;
+    border: 2px solid #dbdbdb;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+}
+
+#byName:checked + .labelColor, #byPopulation:checked + .labelColor, #isReverse:checked + .labelColor{
+    clip-path: circle(100%);
+}
+
+#byName:checked + .labelNormal .name, #byPopulation:checked + .labelNormal .name, #isReverse:checked + .name{
+    color: #fff;
+}
+
+#byName:checked + .labelNormal .icon, #byPopulation:checked + .labelNormal .icon, #isReverse:checked + .icon{
+    border-color: #fff;
+    color: #fff;
+}
