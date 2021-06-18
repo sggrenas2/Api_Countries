@@ -24,6 +24,7 @@ export function CardContainer({data, pages, byName, byPopulation, getData, isLoa
                     name={country.name}
                     flag={country.flag}
                     continent={country.continent}
+                    key = {country.id}
                 >
                 </Card>
             })
