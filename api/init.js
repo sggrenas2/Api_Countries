@@ -65,8 +65,7 @@ module.exports = async () => {
     activity3 = await Activity.create(activity3);
 
     for(let i = 0; i<countries.length;i++){
-        await countries[i].setActivities(activity1);
-        await countries[i].setActivities(activity2);
+        await countries[i].setActivities([activity1,activity2]);
     }
     
     await countries[6].setActivities(activity3);

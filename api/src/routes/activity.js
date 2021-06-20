@@ -64,4 +64,16 @@ router.get('/activity/filtersData', async (req,res) =>{
     res.status(200).json(dataSend);
 });
 
+router.get('/activity/fulldata', async (req,res)=>{
+    let data = await Activity.findAll({
+        include:{
+            model: Country,
+            through: {
+                attributes: [],
+            }
+        }
+    })
+    res.status(200).json(data);
+})
+
 module.exports = router;

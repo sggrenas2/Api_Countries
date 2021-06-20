@@ -11,7 +11,7 @@ const countries = (state = initialState, action) => {
         case 'LOADING':
             return {...state, isLoading: true};
         case 'SHOW_DATA':
-            return {
+            return { 
                 ...state,
                 isLoading:false,
                 dataPage: action.dataPage,

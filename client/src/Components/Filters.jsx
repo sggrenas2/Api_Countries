@@ -8,15 +8,11 @@ export function Filter(props){
         let ascDec = document.getElementById(`${filterStyle.isReverse}`);
         let byName = document.getElementById(`${filterStyle.byName}`);
         let byPopulation = document.getElementById(`${filterStyle.byPopulation}`);
-        console.log("asc/dec= "+ascDec.checked);
-        console.log("byName = "+byName.checked);
-        console.log("byPopulation = "+byPopulation.checked);
         if(!byPopulation.checked && !byName.checked && ascDec.checked) {
             window.alert("Select a filter Type first");
             ascDec.checked = false;
         }
         ascDec = (ascDec.checked) ? 'dec' : 'asc';
-        console.log("asc/dec= "+ascDec);
         if(byName.checked) props.setFilter("byName",ascDec);
         if(byPopulation.checked) props.setFilter("byPopulation",ascDec);
     }

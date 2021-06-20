@@ -18,16 +18,19 @@ export function CardContainer({data, pages, byName, byPopulation, getData, isLoa
         {(isLoading)?
             <h1>loading...</h1>
             :
-            data.map(country=>{
-                return <Card
-                    id={country.id}
-                    name={country.name}
-                    flag={country.flag}
-                    continent={country.continent}
-                    key = {country.id}
-                >
-                </Card>
-            })
+            (data.length>0)?
+                data.map(country=>{
+                    return <Card
+                        id={country.id}
+                        name={country.name}
+                        flag={country.flag}
+                        continent={country.continent}
+                        key = {country.id}
+                    >
+                    </Card>
+                })
+                :
+                <h1>No Data Found</h1>
         }
     </div>
 }
