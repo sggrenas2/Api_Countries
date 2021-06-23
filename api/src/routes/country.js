@@ -102,7 +102,6 @@ router.get('/countries', async (req, res) => {
             :
             await getData();
         if(req.query.byContinent || req.query.byActivity) data = filterData(data, req.query.byContinent, req.query.byActivity);
-        console.log("%s byName= "+req.query.byName+" byPopulation= "+req.query.byPopulation);
         if(req.query.byName || req.query.byPopulation) data = orderBy(data, req.query.byName, req.query.byPopulation);
         data = pagination(data);
         data = (data.length === 0) ? 
@@ -114,7 +113,7 @@ router.get('/countries', async (req, res) => {
                 }
     }catch(e){
         res.status(500).json({status:500, e:e.toString(),});
-    } 
+    }
     res.status(200).json(data);
 });
 
@@ -124,9 +123,8 @@ router.get('/countries/:id', async (req,res)=>{
         data = await Country.findByPk(req.params.id,{
             include:{
                 model: Activity,
-                attributes: [],
             }
-        })
+        });
     }catch(e){
         res.status(500).json({status:500,e:e.toString()});
     }

@@ -5,7 +5,7 @@ import {getData} from './../Actions';
 import containerStyle from './../Css/CardContainer.module.css';
 
 
-export function CardContainer({data, pages, byName, byPopulation, getData, isLoading}){
+export function CardContainer({data, byName, byPopulation, getData, isLoading}){
 
     useEffect(()=>{
         let options = {}

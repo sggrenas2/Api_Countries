@@ -12,8 +12,16 @@ export function getData(page=1,options, front){
                     urlBase += `&${key}=${options[key]}`;
                 }
             }
+            console.log(urlBase);
             let data = await fetch(urlBase);
-            let {dataPage, pages} = await data.json();
+            data = await data.json();
+            if(Array.isArray(data)){
+                data = {
+                    dataPage: [],
+                    pages: 0,
+                }
+            }
+            let {dataPage, pages} = data;
             dispatch(showData(dataPage, pages));
         }
     }

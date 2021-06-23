@@ -1,17 +1,13 @@
 import "./App.css";
-import CardContainer from "./Components/CardContainer.jsx";
-import Filters from './Components/Filters.jsx';
-import ActivityFilter from "./Components/ActivityFilter";
+import Main from "./Components/Main.jsx";
+import CountryDetail from "./Components/countryDetail.jsx";
+import { Route } from 'react-router-dom';
 
 function App() {
 	return (
 		<div className="App">
-			<Filters
-				filterType="ByContinent"
-				filterName="By Continent"
-			></Filters>
-			<ActivityFilter></ActivityFilter>
-      		<CardContainer></CardContainer>
+			<Route path="/home" component={Main}></Route>
+			<Route path="/country/:id" component={CountryDetail}></Route>
 		</div>
 	);
 }

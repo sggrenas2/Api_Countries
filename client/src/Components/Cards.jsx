@@ -7,7 +7,7 @@ export function Card(props){
         <>
             <div className={cardStyle.container}>
                 <Link
-                    to={`/countries/${props.id}`}
+                    to={`/country/${props.id}`}
                     className={cardStyle.link}
                 >
                 </Link>
