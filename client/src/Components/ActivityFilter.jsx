@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styleFiltersAct from "./../Css/ActivityFilter.module.css";
 import { connect } from "react-redux";
-import { getData } from "../Actions";
+import { getData, setFilter } from "../Actions";
 import SearchBar from "./searchBar.jsx";
 
-export function ActivityFilter({ getData }) {
+export function ActivityFilter({ getData, setFilter }) {
 	const [filters, setFilters] = useState({});
 
 	useEffect(() => {
@@ -19,45 +19,64 @@ export function ActivityFilter({ getData }) {
 	}, []);
 
 	function handleChange(ev) {
-		let options = {
-			searchValue: "",
-			seasons: [],
-			difficulties: [],
-			durations: [],
-		};
-		let seasons = Array.from(document.getElementsByName("season"));
-		let difficulties = Array.from(document.getElementsByName("difficulty"));
-		let durations = Array.from(document.getElementsByName("duration"));
-		if (ev.target.id === "searchButton") {
-			options.searchValue =
-				document.getElementById("activitySearch").value;
+		
+		if(ev.target.name === "continents"){
+			setFilter("byContinent", ev.target.id);
+		}else{
+			let options = {
+				searchValue: "",
+				seasons: [],
+				difficulties: [],
+				durations: [],
+			};
+			let seasons = Array.from(document.getElementsByName("season"));
+			let difficulties = Array.from(document.getElementsByName("difficulty"));
+			let durations = Array.from(document.getElementsByName("duration"));
+			if (ev.target.id === "searchButton") {
+				options.searchValue =
+					document.getElementById("activitySearch").value;
+			}
+			seasons.forEach((el) => {
+				let obj = {};
+				if (el.checked) {
+					obj[el.value] = el.checked;
+					options.seasons.push(obj);
+				}
+			});
+			difficulties.forEach((el) => {
+				let obj = {};
+				if (el.checked) {
+					obj[el.value] = el.checked;
+					options.difficulties.push(obj);
+				}
+			});
+			durations.forEach((el) => {
+				let obj = {};
+				if (el.checked) {
+					obj[el.value] = el.checked;
+					options.durations.push(obj);
+				}
+			});
+			getData(1, options, true);
 		}
-		seasons.forEach((el) => {
-			let obj = {};
-			if (el.checked) {
-				obj[el.value] = el.checked;
-				options.seasons.push(obj);
-			}
-		});
-		difficulties.forEach((el) => {
-			let obj = {};
-			if (el.checked) {
-				obj[el.value] = el.checked;
-				options.difficulties.push(obj);
-			}
-		});
-		durations.forEach((el) => {
-			let obj = {};
-			if (el.checked) {
-				obj[el.value] = el.checked;
-				options.durations.push(obj);
-			}
-		});
-		getData(1, options, true);
 	}
 
 	return (
-		<>
+		<>	
+			<input
+				type="checkbox"
+				id={styleFiltersAct.titleContinent}
+				name="title"
+			></input>
+			<label
+				htmlFor={styleFiltersAct.titleContinent}
+				id={styleFiltersAct.titleContainerContinent}
+			>
+				<span>Continent Filter</span>
+				<span id={styleFiltersAct.icon}>
+					<i className="fa fa-angle-down" aria-hidden="true"></i>
+				</span>
+			</label>
 			<input
 				type="checkbox"
 				id={styleFiltersAct.title}
@@ -238,6 +257,31 @@ export function ActivityFilter({ getData }) {
 					)}
 				</fieldset>
 			</div>
+			<div id={styleFiltersAct.contentContainerContinent}>
+				<fieldset id={styleFiltersAct.continents}>
+					<legend>Continents</legend>
+					<label htmlFor="Africa">
+						Africa
+						<input type="radio" name="continents" id="Africa" value="Africa" onChange={handleChange}></input>
+					</label>
+					<label htmlFor="Americas">
+						America
+						<input type="radio" name="continents" id="Americas" value="Americas" onChange={handleChange}></input>
+					</label>
+					<label htmlFor="Asia">
+						Asia
+						<input type="radio" name="continents" id="Asia" value="Asia" onChange={handleChange}></input>
+					</label>
+					<label htmlFor="Europe">
+						Europe
+						<input type="radio" name="continents" id="Europe" value="Europe" onChange={handleChange}></input>
+					</label>
+					<label htmlFor="Oceania">
+						Oceania
+						<input type="radio" name="continents" id="Oceania" value="Oceania" onChange={handleChange}></input>
+					</label>
+				</fieldset>
+			</div>
 		</>
 	);
 }
@@ -246,6 +290,7 @@ function mapDispatchToProps(dispatch) {
 	return {
 		getData: (page, options, front) =>
 			dispatch(getData(page, options, front)),
+		setFilter: (option, type) => dispatch(setFilter(option,type)),
 	};
 }
 

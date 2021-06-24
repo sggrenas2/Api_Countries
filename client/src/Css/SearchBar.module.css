@@ -1,0 +1,16 @@
+#container{
+    grid-column: 1/4;
+    grid-row: 1/2;
+    border-bottom: 1px solid #ededed;
+}
+
+#container input[type="text"] {
+    width: 50%;
+	height: 35px;
+    margin: 10px;
+}
+
+#container input[type="button"]{
+    width: 100px;
+    height: 40px;
+}

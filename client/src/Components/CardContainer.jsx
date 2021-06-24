@@ -1,20 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Card from './Cards.jsx';
 import {connect} from 'react-redux';
 import {getData} from './../Actions';
+import Pagination from './Pagination.jsx';
 import containerStyle from './../Css/CardContainer.module.css';
 
 
-export function CardContainer({data, byName, byPopulation, getData, isLoading}){
+export function CardContainer({data, pages, byName, byPopulation, byContinent, getData, isLoading}){
+
+    const [opt, setOpt] = useState({});
 
     useEffect(()=>{
         let options = {}
         if(byName==="asc" || byName==="dec") options.byName = byName;
         if(byPopulation==="asc" || byPopulation==="dec") options.byPopulation = byPopulation;
+        if(byContinent) options.byContinent = byContinent;
+        setOpt(options);
         getData(1, options);
     },[byName, byPopulation])
 
-    return <div id={containerStyle.cardsContainer}>
+    return <>
+        <Pagination
+            pages = {pages}
+            onClick = {getData}
+            options = {opt}
+        ></Pagination>
+        <div id={containerStyle.cardsContainer}>
+        
         {(isLoading)?
             <h1>loading...</h1>
             :
@@ -33,6 +45,8 @@ export function CardContainer({data, byName, byPopulation, getData, isLoading}){
                 <h1>No Data Found</h1>
         }
     </div>
+    </>    
+    
 }
 
 function mapStateToProps(state){
@@ -42,6 +56,7 @@ function mapStateToProps(state){
         isLoading: state.isLoading,
         byName: state.byName,
         byPopulation: state.byPopulation,
+        byContinent: state.byContinent,
     }
 };
 

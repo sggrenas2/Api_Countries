@@ -4,6 +4,8 @@ const initialState = {
     pages: 0,
     byName: false,
     byPopulation: false,
+    byContinent: false,
+    dataDetails: {},
 };
 
 const countries = (state = initialState, action) => {
@@ -21,8 +23,6 @@ const countries = (state = initialState, action) => {
             let newState = {
                 ...state
             }
-            console.log("filterActive= "+action.filterActive);
-            console.log("option= "+action.opt);
             if(action.filterActive==="byName"){
                 newState.byName = action.opt;
                 newState.byPopulation = false;
@@ -30,7 +30,12 @@ const countries = (state = initialState, action) => {
                 newState.byName = false;
                 newState.byPopulation = action.opt;
             }
+            if(action.filterActive==="byContinent"){
+                newState.byContinent = action.opt;
+            }
             return newState;
+        case 'SET_COUNTRY_DETAILS':
+            return {...state, dataDetails: action.data}
         default:
             return state;
     }

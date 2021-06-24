@@ -30,6 +30,8 @@
     top: -240px;
     left: 130px;
     width: 150px;
+    height: 110px;
+    overflow: hidden;
 }
 
 .text h3{

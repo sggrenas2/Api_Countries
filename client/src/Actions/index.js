@@ -12,7 +12,6 @@ export function getData(page=1,options, front){
                     urlBase += `&${key}=${options[key]}`;
                 }
             }
-            console.log(urlBase);
             let data = await fetch(urlBase);
             data = await data.json();
             if(Array.isArray(data)){
@@ -77,7 +76,6 @@ export function orderData(page,data, options){
             })
         }
     });
-    console.log(filterData);
     let countries = [];
     filterData.forEach(el => countries.push(el.Countries));
     countries = countries.flat();
@@ -107,4 +105,19 @@ function pagination(data, amountByPage=10){
         data.push(page);
     }
     return data;
+}
+
+export function getCountryDetails(id){
+    return async (dispatch) => {
+        let data = await fetch(`http://localhost:3001/countries/${id}`);
+        data = await data.json();
+        dispatch(setCountryDetails(data));
+    }
+}
+
+export function setCountryDetails(data){
+    return{
+        type: "SET_COUNTRY_DETAILS",
+        data,
+    }
 }
