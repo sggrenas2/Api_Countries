@@ -6,6 +6,7 @@ const initialState = {
     byPopulation: false,
     byContinent: false,
     dataDetails: {},
+    success: ''
 };
 
 const countries = (state = initialState, action) => {
@@ -35,9 +36,13 @@ const countries = (state = initialState, action) => {
             }
             return newState;
         case 'SET_COUNTRY_DETAILS':
-            return {...state, dataDetails: action.data}
+            return {...state, dataDetails: action.data};
+        case 'SUCCESS':
+            return {...state, success: action.res, isLoading: false};
+        case 'CLEAN_SUCCESS':
+            return {...state, success: ""};
         default:
-            return state;
+            return state; 
     }
 }
 

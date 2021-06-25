@@ -11,7 +11,7 @@ export function Pagination(props){
                 onClick={()=>props.onClick(i+1,props.options)}
                 key={i}
                 id={stylePagination.page}
-            ><i class="fas fa-circle"></i></NavLink>)
+            ><i className="fas fa-circle"></i></NavLink>)
         }
         return buttons
     }

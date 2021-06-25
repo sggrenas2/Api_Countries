@@ -1,0 +1,66 @@
+#formContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    width: 300px;
+    height: 600px;
+    padding: 20px;
+}
+
+.labelContainer span{
+    font-family: var(--titleFont);
+    letter-spacing: 0.5;
+    font-weight: bold;
+}
+
+#searchHeader{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 50px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.picked{
+    background-color: #ededed;
+    margin: 2px;
+    width: 100px;
+}
+
+.details{
+    padding: 5px;
+    border: 1px solid #7a7a7a;
+}
+
+.details a{
+    color: red;
+}
+
+#seasonContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#submit{
+    border: 3px solid rgba(5, 206, 145, 1);
+    border-radius: 10px;
+    width: 250px;
+    height: 30px;
+    letter-spacing: 1px;
+    font-family: var(--titleFont);
+    font-weight: bold;
+    background-color: rgba(5, 206, 145, .7);
+}
+
+#submit:hover{
+    background-color: rgba(5, 206, 145, 1);
+}
+
+#pickedCountries{
+    max-height: 50px;
+}

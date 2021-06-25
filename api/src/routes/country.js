@@ -131,4 +131,11 @@ router.get('/countries/:id', async (req,res)=>{
     res.status(200).json(data)
 });
 
+router.get('/countries/codes/3', async (req,res)=>{
+    let data = await Country.findAll({
+        attributes: ["id","name"],
+    });
+    res.status(200).json(data);
+});
+
 module.exports = router;

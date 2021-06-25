@@ -1,0 +1,52 @@
+#container{
+    position: relative;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+    width: 30%;
+    padding-left: 20px;
+}
+
+#createActivity{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#close{
+    display: block;
+    font-size: 20px;
+    font-weight: bolder;
+    color: red;
+    text-decoration: none;
+    position: absolute;
+    left: 95%;
+    top: 10px;
+}
+
+#link{
+    font-family: var(--titleFont);
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    font-weight: bolder;
+    color: black;
+}
+
+#link:visited{
+    color: black;
+}
+
+#link:hover{
+    color: #05ce91;
+    border-bottom: 2px solid #05ce91;
+}

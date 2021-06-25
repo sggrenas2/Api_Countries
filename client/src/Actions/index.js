@@ -1,3 +1,4 @@
+
 export function getData(page=1,options, front){
     return async (dispatch) => {
         dispatch(loading());
@@ -119,5 +120,33 @@ export function setCountryDetails(data){
     return{
         type: "SET_COUNTRY_DETAILS",
         data,
+    }
+}
+
+export function createActivity(data){
+    return async (dispatch) => {
+        dispatch(loading());
+        let res = await fetch(`http://localhost:3001/activity`,{
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data),
+        });
+        dispatch(success(res));
+    }
+}
+
+export function success(res){
+    return {
+        type: "SUCCESS",
+        res,
+    }
+}
+
+export function cleanSuccess(){
+    return {
+        type: "CLEAN_SUCCESS",
     }
 }

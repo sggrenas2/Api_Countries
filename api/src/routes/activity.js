@@ -17,6 +17,7 @@ router.post('/activity', async (req,res)=>{
         countries[i] = await Country.findByPk(req.body.countries[i]);
     }
     activityB.setCountries(countries);
+    res.status(200).send("complete");
 });
 
 router.get('/activity/filtersData', async (req,res) =>{

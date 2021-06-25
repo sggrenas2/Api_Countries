@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import { getCountryDetails } from "./../Actions";
+import Dropdwon from "./DropdownMenu.jsx";
 import styleCountry from "./../Css/countryDetail.module.css";
 
 export function CountryDetail({ dataDetails, getCountryDetails, isLoading}) {
@@ -64,10 +65,19 @@ export function CountryDetail({ dataDetails, getCountryDetails, isLoading}) {
                         </p>
                     </fieldset>
                 </div>
-                <div className={styleCountry.container}>
+                <div className={styleCountry.container} id={styleCountry.activityContainer}>
                     <h2>Activities</h2>
                     {(dataDetails.Activities && dataDetails.Activities.length !== 0) ? 
-                        <p>si tiene</p>
+                        dataDetails.Activities.map((activity,i) => {
+                            return <Dropdwon
+                                id={`activity${i}`}
+                                name = {activity.name}
+                                difficulty = {activity.difficulty}
+                                duration = {activity.duration}
+                                season = {activity.season}
+                            >
+                            </Dropdwon>
+                        })
                      : 
                         <p>No activities found</p>
                     }
